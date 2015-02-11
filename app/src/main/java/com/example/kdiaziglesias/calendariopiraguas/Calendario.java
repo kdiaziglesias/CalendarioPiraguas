@@ -5,7 +5,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -17,20 +19,29 @@ public class Calendario extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
 
-        String salutation="";
-        String Fecha="";
+
         CheckBox timeCheckBox = (CheckBox)findViewById(R.id.checkbox);
-        if (timeCheckBox.isChecked()){
-            DatePicker date = (DatePicker)findViewById(R.id.datePicker);
-            String dateToShow = date.getDayOfMonth()+"/"+(date.getMonth()+1)+"/"+date.getYear();
-            TimePicker time = (TimePicker)findViewById(R.id.timePicker);
-            dateToShow += " " + time.getCurrentHour() + ":" + time.getCurrentMinute();
-            Fecha = salutation + " " +dateToShow;
 
+        timeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-        }
+            String salutation="";
+            String Fecha="";
 
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                int visibility =isChecked? View.VISIBLE:View.GONE;
+                View view = findViewById(R.id.timePicker);
+                view.setVisibility(visibility);
+                view= findViewById(R.id.datePicker);
+                view.setVisibility(visibility);
+                DatePicker date = (DatePicker)findViewById(R.id.datePicker);
+                String dateToShow = date.getDayOfMonth()+"/"+(date.getMonth()+1)+"/"+date.getYear();
+                TimePicker time = (TimePicker)findViewById(R.id.timePicker);
+                dateToShow += " " + time.getCurrentHour() + ":" + time.getCurrentMinute();
+                Fecha = salutation + " " +dateToShow;
+            }
+        });
 
 
     }
