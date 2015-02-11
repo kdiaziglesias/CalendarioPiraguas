@@ -1,6 +1,8 @@
 package com.example.kdiaziglesias.calendariopiraguas;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,7 +20,10 @@ public class Calendario extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-
+ ContentValues cv = new ContentValues();
+        cv.put(CalendarContract.Reminders.MINUTES,15);
+        cv.put(CalendarContract.Reminders.EVENT_ID,R.id.checkbox);
+        cv.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
 
         CheckBox timeCheckBox = (CheckBox)findViewById(R.id.checkbox);
 
