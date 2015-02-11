@@ -1,7 +1,10 @@
 package com.example.kdiaziglesias.calendariopiraguas;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,6 +16,8 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import java.net.URI;
+
 
 public class Calendario extends ActionBarActivity {
 
@@ -20,7 +25,19 @@ public class Calendario extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
- ContentValues cv = new ContentValues();
+        Cursor cur = null;
+        ContentResolver cr = getContentResolver();
+        Uri uri = CalendarContract.Calendars.CONTENT_URI;
+
+       /* public static final String[] Campos;
+        Campos = new String[]{
+                CalendarContract.Calendars._ID,
+                CalendarContract.Calendars.ACCOUNT_NAME,
+                CalendarContract.Calendars.CALENDAR_DISPLAY_NAME
+        };*/
+
+
+        ContentValues cv = new ContentValues();
         cv.put(CalendarContract.Reminders.MINUTES,15);
         cv.put(CalendarContract.Reminders.EVENT_ID,R.id.checkbox);
         cv.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
